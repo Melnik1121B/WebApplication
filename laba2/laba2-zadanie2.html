@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Задание 2</title>
+    </head>
+
+    <body>
+        <!--элементы для кнопки и ссылки-->
+        <button onclick="replaceText()">Нажмите для замены текста</button>
+        <h1 id="myLink">Перейти на Ютуб</h1>
+    
+    <script>
+        var str_ ="КАКОЙ ЮТУБ???! НА ТЕБЕ САНКЦИИ!";
+
+        function replaceText() { //функция для замены текста
+            var myLink = document.getElementById('myLink');
+            myLink.innerHTML =str_;
+        }
+    </script>
+    
+    </body>
+
+</html>

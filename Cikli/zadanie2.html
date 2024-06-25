@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8">
+<title>Таблица умножения</title>
+</head>
+<body>
+
+<table id="multiplicationTable"></table>
+
+<script>
+function createMultiplicationTable() {
+    var table = document.getElementById("multiplicationTable");
+    
+    // Очистка таблицы, если она уже существует
+    table.innerHTML = '';
+    
+    // Создание таблицы умножения
+
+    for (var i = 1; i <= 10; i++) {
+        var row = table.insertRow(); //Добавляем новую строку
+        for (var j = 1; j <= 10; j++) {
+            var cell = row.insertCell(); //Добавляем новую ячейку
+            cell.textContent = i * j; //Заполняем ячейку результатом умножения
+            
+            // проверка на создание таблицы 5х6
+
+            if (i === 5 && j === 6) {
+                setTimeout(function() {
+                    alert("Таблица остановилась до 5х6");
+                }, 0);
+                return; //Завершение функции
+            }
+        }
+    }
+
+    // Вывод сообщения о завершении работы после создания таблицы
+    setTimeout(function() {
+        alert("Таблица успешна создана!");
+    }, 0);
+}
+
+createMultiplicationTable(); // Вфзов функции для создания таблицы умножения
+</script>
+
+</body>
+</html>

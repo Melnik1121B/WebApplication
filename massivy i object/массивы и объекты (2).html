@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>рмиропромо</title>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+    }
+  </style>
+</head>
+<body>
+       <div class="1">
+      <H1>Задание 1</H1>
+    <label for="name">Имя:</label>
+    <input type="text" id="name"><br>
+
+    <label for="age">Возраст:</label>
+    <input type="number" id="age" min="18" max="100"><br>
+
+    <button onclick="addEmployee()">Добавить сотрудника</button>
+    <button onclick="showTable()">Показать строку</button>
+    <div id="strings"></div>
+    </div>
+
+<div class="2">
+      
+        <H1>Задание 2</H1>
+        <label for="nameInput">Имя:</label>
+        <input type="text" id="nameInput"><br>
+      
+        <label for="ageInput">Возраст:</label>
+        <input type="number" id="ageInput" min="18" max="100"><br>
+      
+        <label for="cityInput">Город:</label>
+        <input type="text" id="cityInput"><br>
+      
+        <button onclick="addData()">Добавить данные</button>
+        <div id="tableContainer"></div>
+      </div>
+      
+
+    <div class="3">
+      <H1>Задание 3</H1>
+    <label for="newElement">Новый элемент:</label>
+    <input type="number" id="newElement"><br>
+<button onclick="addElement()">Добавить элемент</button>
+      <p id = "Numb_Arr"></p>
+    <p id="Numb_result"></p>
+
+    <div class="4">
+      <H1>Задание 4</H1>
+      <label for="newNumber">Новое число:</label>
+<input type="number" id="newNumber"><br>
+
+<button onclick="addNumber()">Добавить число</button>
+<button onclick="calculate()">Показать сумму</button>
+<p id="NumbSum"></p>
+<p id="sumResult"></p>
+
+    </div>
+    
+</div>
+<div class="5">
+  <H1>Задание 5</H1>
+    <label for="number_one">Первое число:</label>
+    <input type="number" id="number_one"><br>
+
+    <label for="number_two">Второе число:</label>
+    <input type="number" id="number_two"><br>
+
+    <label for="step">Шаг:</label>
+    <input type="number" id="step"><br>
+
+    <button onclick="range()">Показать результат</button>
+    
+    <p id="result"></p>
+  </div>
+  <div class="6">
+    <h1>Задание 6</h1>
+    <input type="text" id="filterInput" placeholder="Введите слово">
+    <button onclick="filterData()">Фильтровать</button>
+    <div id="Filtresult"></div>
+  </div>
+  
+    
+  <script>
+ window.datafoTable = [];
+    var data = [];
+
+    function addEmployee() {
+      var name = document.getElementById("name").value;
+      var age = parseInt(document.getElementById("age").value);
+
+      if (name && age && age >= 18 && age <= 100) { 
+        data.push({ name: name, age: age });
+        document.getElementById("name").value = "";
+        document.getElementById("age").value = "";
+      }
+    }
+    function showTable() {
+  var tableContainer = document.getElementById("strings");
+  var employees = formatEmployees(data);
+  var employeeString = employees.join("<br>");
+  tableContainer.innerHTML = employeeString;
+}
+
+
+    function formatEmployees(data) {
+      return data.map(function(employee) {
+        return "Имя: " + employee.name + ", возраст: " + employee.age;
+      });
+    }
+
+     function buildTable(data) 
+    {
+      // Создаем таблицу
+      var table = document.createElement("table");
+
+      // Создаем заголовок таблицы
+      var thead = document.createElement("thead");
+      var headerRow = document.createElement("tr");
+
+      // Получаем наименования свойств из первого объекта
+      var properties = Object.keys(data[0]);
+
+      // Создаем ячейки заголовка таблицы
+      properties.forEach(function(property) {
+        var th = document.createElement("th");
+        th.textContent = property;
+        headerRow.appendChild(th);
+      });
+
+      // Добавляем заголовок в таблицу
+      thead.appendChild(headerRow);
+      table.appendChild(thead);
+
+      // Создаем тело таблицы
+      var tbody = document.createElement("tbody");
+
+      // Создаем строки и ячейки данных
+      data.forEach(function(item) {
+        var row = document.createElement("tr");
+
+        properties.forEach(function(property) {
+          var cell = document.createElement("td");
+          cell.textContent = item[property];
+          row.appendChild(cell);
+        });
+
+        tbody.appendChild(row);
+      });
+
+      // Добавляем тело в таблицу
+      table.appendChild(tbody);
+
+      // Возвращаем построенную таблицу
+      return table;
+    }
+    function addData() {
+  var name = document.getElementById("nameInput").value;
+  var age = parseInt(document.getElementById("ageInput").value);
+  var city = document.getElementById("cityInput").value;
+
+  if (name && age && city && age >= 18 && age <= 100) {
+    datafoTable.push({ name: name, age: age, city: city });
+    document.getElementById("nameInput").value = "";
+    document.getElementById("ageInput").value = "";
+    document.getElementById("cityInput").value = "";
+
+    var tableContainer = document.getElementById("tableContainer");
+    var table = buildTable(datafoTable);
+    tableContainer.innerHTML = "";
+    tableContainer.appendChild(table);
+  }
+}
+    var arr = []; 
+
+    function addElement() {
+  var newElement = parseInt(document.getElementById("newElement").value);
+  if (!isNaN(newElement)) {
+    arr.push(newElement);
+    document.getElementById("newElement").value = "";
+    calculateProduct(arr);
+  }
+}
+
+function calculateProduct(arr) {
+  if (arr.length === 0) {
+    return 0;
+  }
+  var result = arr.reduce(function(a, b) {
+    return a * b;
+  });
+  document.getElementById("Numb_Arr").innerHTML = arr.join(",");
+  document.getElementById("Numb_result").textContent = "Результат: " + result;
+}
+
+
+function addNumber() 
+{
+  var newNumber = parseInt(document.getElementById("newNumber").value);
+  if (!isNaN(newNumber)) {
+    brr.push(newNumber);
+    document.getElementById("newNumber").value = "";
+  }
+}
+
+function calculateSum(brr) {
+  var sum = 0;
+  var newArr = [];
+  for (var i = 0; i < brr.length; i++) {
+    sum += brr[i];
+    newArr.push(sum);
+  }
+  return newArr;
+}
+function calculate() {
+  var result = calculateSum(brr);
+  document.getElementById("NumbSum").innerHTML = brr.join(",");
+  document.getElementById("sumResult").innerHTML = result.join(",");
+}
+
+var brr = [];
+var result = calculateSum(brr);
+document.getElementById("sumResult").innerHTML = result.join(",");
+
+
+
+
+
+    function range() 
+    {
+      var start = parseInt(document.getElementById("number_one").value);
+var end = parseInt(document.getElementById("number_two").value);
+var step = parseInt(document.getElementById("step").value);
+
+if (isNaN(step)) { step = 1; }
+if(step == 0)
+{document.getElementById("result").innerHTML = ("Так не нада");}
+
+const result = [];
+if(start < end && step> 0)
+{
+for (let i = start; i <= end; i += step) {
+  result.push(i);
+}
+document.getElementById("result").innerHTML = result.join(",");
+}
+
+else if(start > end && step < 0)
+{
+for (let i = start; i >= end; i += step) {
+  result.push(i);
+}
+document.getElementById("result").innerHTML = result.join(",");
+}
+else if(start < end && step < 0)
+{
+document.getElementById("result").innerHTML = ("Так не нада");;
+}
+    }
+
+
+  
+
+        function filterData() {
+  var input = document.getElementById("filterInput").value.toLowerCase();
+  var filteredData = datafoTable.filter(function(item) {
+    return item.name.toLowerCase().includes(input) ||
+           item.age.toString().includes(input) ||
+           item.city.toLowerCase().includes(input);
+  });
+
+  var resultElement = document.getElementById("Filtresult");
+  resultElement.innerHTML = "";
+
+  filteredData.forEach(function(item) {
+    var p = document.createElement("p");
+    p.textContent = "Имя: " + item.name + ", Возраст: " + item.age + ", Город: " + item.city;
+    resultElement.appendChild(p);
+  });
+}
+
+</script>
+
+
+  </script>
+</body>
+</html>

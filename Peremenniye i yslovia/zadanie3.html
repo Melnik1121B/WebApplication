@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Задание3</title>
+</head>
+<body>
+
+<!-- Элементы для ввода данных и кнопки -->
+<label for="dayNumber">Введите число от 1 до 7:</label>
+<input type="number" id="dayNumber">
+<button onclick="getDayOfWeek()">Получить день недели</button>
+
+<!-- Элемент для вывода результата -->
+<p id="result"></p>
+
+<script>
+    // Функция для определения дня недели
+    function getDayOfWeek() {
+        // Получаем значение из поля ввода
+        var dayNumber = parseInt(document.getElementById('dayNumber').value);
+
+        // Проверяем, что число находится в диапазоне от 1 до 7
+        if (dayNumber >= 1 && dayNumber <= 7) {
+            // Массив с днями недели
+            var daysOfWeek = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"];
+            
+            // Получаем соответствующий день недели
+            var dayOfWeek = daysOfWeek[dayNumber - 1];
+
+            // Выводим результат на экран
+            document.getElementById('result').innerHTML = "День недели: " + dayOfWeek;
+        } else {
+            // Выводим уведомление, если число вне диапазона
+            document.getElementById('result').innerHTML = "ТЫ ШО ДУРНОЙ????";
+        }
+    }
+</script>
+
+</body>
+</html>

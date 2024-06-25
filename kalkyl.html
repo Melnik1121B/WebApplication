@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Калькулятор</title>
+    <style>
+        .calculator {
+            width: 250px;
+            margin: 0 auto;
+        }
+
+        .result {
+            font-size: 24px;
+            text-align: right;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5px;
+        }
+
+        button {
+            font-size: 20px;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="result" id="result">0</div>
+        <div class="buttons">
+            <button onclick="appendToResult('7')">7</button>
+            <button onclick="appendToResult('8')">8</button>
+            <button onclick="appendToResult('9')">9</button>
+            <button onclick="appendToResult('+')">+</button>
+            <button onclick="appendToResult('4')">4</button>
+            <button onclick="appendToResult('5')">5</button>
+            <button onclick="appendToResult('6')">6</button>
+            <button onclick="appendToResult('-')">-</button>
+            <button onclick="appendToResult('1')">1</button>
+            <button onclick="appendToResult('2')">2</button>
+            <button onclick="appendToResult('3')">3</button>
+            <button onclick="appendToResult('*')">*</button>
+            <button onclick="appendToResult('0')">0</button>
+            <button onclick="appendToResult('.')">.</button>
+            <button onclick="calculateResult('=')">=</button>
+            <button onclick="appendToResult('/')">/</button>
+        </div>
+    </div>
+
+    <script>
+        let currentResult = '';
+        let previousInput = '';
+    
+        function appendToResult(value) {
+            if (value === '.' && currentResultHasDecimal()) {
+                return; // Пропустить добавление точки, если уже есть точка в текущем числе
+            }
+    
+            if (value === '=' || isOperator(value)) {
+                if (!isOperator(previousInput)) {
+                    currentResult += value;
+                }
+            } else {
+                currentResult += value;
+            }
+    
+            document.getElementById('result').textContent = currentResult;
+            previousInput = value;
+        }
+    
+        function calculateResult() {
+            if (checkDivisionByZero(currentResult)) {
+                alert("Делить на ноль нельзя");
+                currentResult = '';
+            } else {
+                try {
+                    currentResult = eval(currentResult).toString();
+                } catch (error) {
+                    alert('Ошибка в выражении');
+                    currentResult = '';
+                }
+            }
+            document.getElementById('result').textContent = currentResult;
+        }
+    
+        function isOperator(value) {
+            return ['+', '-', '*', '/'].includes(value);
+        }
+    
+        function currentResultHasDecimal() {
+            const parts = currentResult.split(/[\+\-\*\/]/);
+            const lastNumber = parts.pop();
+            return lastNumber.includes('.');
+        }
+    
+        function checkDivisionByZero(expression) {
+            return expression.includes('/0');
+        }
+    </script>
+</body>
+</html>

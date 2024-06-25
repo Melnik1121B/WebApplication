@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Задание 3</title>
+    </head>
+
+    <body>
+        <!--ЭЛЕМЕНТЫ ДЛЯ КНОПКИ ПО ИНФЕ КОМПА-->
+        <button onclick="displayComputer()">Нажми на кнопку для вывода инфы по компу</button>
+        <p id="computerDitails"></p>
+    
+    <script>
+        var computer = { //СОЗДАЕМ ОБЪЕКТ КОМПЬЮТЕР И ЕГО СВОЙСТВА
+            model: "B70-80",
+            CPU: "Intel Core i5-5200U",
+            GPU: "Nvidia Geforce 920M",
+            RAM: "8GB",
+            manufacturer: "Lenovo",
+            price: 654
+        };
+
+        function displayComputer() { //ФУНКЦИЯ ВЫВОДА ИНФЫ
+            var ditailsElemetn = document.getElementById('computerDitails');
+            ditailsElemetn.innerHTML = 
+            "Модель: " + computer.model + "<br>" +
+                                        
+            "Производитель: " + computer.manufacturer + "<br>" +
+
+            "Процессор: " + computer.CPU + "<br>" +
+
+            "Видеокарта: " + computer.GPU + "<br>" +
+
+            "ОЗУ: " + computer.RAM + "<br>" +
+
+            "Цена: $" + computer.price;
+        }
+    </script>
+    
+    </body>
+</html>

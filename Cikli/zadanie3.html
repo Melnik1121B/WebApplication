@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8">
+<title>Проверка на четность</title>
+
+<body>
+    <h2>Проверка на четность элементов массива</h2>
+    <label for="inputArray">Введите жлемента массива</label>
+    <input type="text" id="inputArray" placeholder="Например: 2,4,6,8">
+    <button onclick="checkArray()">Check</button>
+    <p id="result"></p>
+  </body>
+
+<script>
+  function areAllEven(array) {
+    for (let i = 0; i < array.length; i++) {
+      if (array[i] % 2 !== 0) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function checkArray() {
+    const inputArray = document.getElementById('inputArray').value.split(',').map(Number);
+    const result = areAllEven(inputArray);
+    document.getElementById('result').innerHTML = result ? 'Все жлементы массива четные' : 'Массив не четный';
+  }
+</script>
+</head>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Расчет количества вагонов</title>
+</head>
+<body>
+  <h2>Введите данные:</h2>
+  <label for="numOrders">Количество заказов:</label>
+  <input type="number" id="numOrders" min="1"><br><br>
+  <label for="wagonLength">Длина вагона:</label>
+  <input type="number" id="wagonLength"><br><br>
+  <label for="wagonWidth">Ширина вагона:</label>
+  <input type="number" id="wagonWidth"><br><br>
+  <label for="wagonHeight">Высота вагона:</label>
+  <input type="number" id="wagonHeight"><br><br>
+  <button onclick="calculateWagons()">Рассчитать</button>
+
+  <div id="result"></div>
+
+  <script>
+    function calculateWagons() {
+      const numOrders = parseInt(document.getElementById('numOrders').value);
+      const boxLength = 50; // Длина коробки в см
+      const boxWidth = 30; // Ширина коробки в см
+      const boxHeight = 40; // Высота коробки в см
+      const padding = 5; // Толщина поролона в см
+
+      const wagonLength = parseInt(document.getElementById('wagonLength').value);
+      const wagonWidth = parseInt(document.getElementById('wagonWidth').value);
+      const wagonHeight = parseInt(document.getElementById('wagonHeight').value);
+
+      const availableVolume = (wagonLength * wagonWidth * wagonHeight) / 1000000; // Объем вагона в м3
+      const boxVolume = ((boxLength + 2 * padding) / 100) * ((boxWidth + 2 * padding) / 100) * ((boxHeight + 2 * padding) / 100); // Объем одной коробки в м3
+      const numBoxes = numOrders; // Предполагаем, что каждый заказ в одной коробке
+
+      const numWagonsNeeded = Math.ceil(numBoxes * boxVolume / availableVolume);
+
+      document.getElementById('result').innerHTML = `Необходимо ${numWagonsNeeded} вагонов для отправки всех заказов.`;
+    }
+  </script>
+</body>
+</html>

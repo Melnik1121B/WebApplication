@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Задачи</title>
+</head>
+<body>
+
+<div id="table-container"></div>
+
+<div id="result-container">
+  <button onclick="showFormattedEmployees()">Показать отформатированных сотрудников</button>
+  <div id="formatted-employees-result"></div>
+
+  <button onclick="showTable()">Показать HTML-таблицу</button>
+  <div id="table-result"></div>
+
+  <button onclick="showProduct()">Показать произведение чисел</button>
+  <div id="product-result"></div>
+
+  <button onclick="showCumulativeSum()">Показать кумулятивную сумму</button>
+  <div id="cumulative-sum-result"></div>
+
+  <button onclick="showRange()">Показать массив чисел в диапазоне</button>
+  <div id="range-result"></div>
+
+  <button onclick="showFilteredEmployees()">Показать отфильтрованных сотрудников</button>
+  <div id="filtered-employees-result"></div>
+
+  <button onclick="showFilteredEmployeesWithoutLoops()">Показать отфильтрованных сотрудников без циклов</button>
+  <div id="filtered-employees-without-loops-result"></div>
+</div>
+
+<script>
+// Задание 1: Форматирование массива сотрудников
+// Функция принимает массив сотрудников и возвращает новый массив строк, содержащих информацию о каждом сотруднике (имя и возраст).
+function formatEmployees(employees) {
+  return employees.map(employee => `Имя: ${employee.name}, возраст: ${employee.age}`);
+}
+
+// Задание 2: Создание HTML таблицы на основе массива объектов
+// Функция принимает массив объектов данных и возвращает HTML таблицу с заголовками и строками данных.
+function createTable(data) {
+  if (data.length === 0) {
+    return ''; // Если массив пуст, вернем пустую строку
+  }
+
+  const tableHeaders = Object.keys(data[0]); // Заголовки таблицы
+
+  const tableRows = data.map(row => {
+    return `<tr>${tableHeaders.map(header => `<td>${row[header]}</td>`).join('')}</tr>`;
+  });
+
+  return `
+    <table>
+      <thead>
+        <tr>${tableHeaders.map(header => `<th>${header}</th>`).join('')}</tr>
+      </thead>
+      <tbody>
+        ${tableRows.join('')}
+      </tbody>
+    </table>
+  `;
+}
+
+// Задание 3: Произведение элементов массива
+// Функция принимает массив чисел и возвращает их произведение.
+function getProduct(arr) {
+  return arr.reduce((product, current) => product * current, 1);
+}
+
+// Задание 4: Создание массива с кумулятивной суммой элементов
+// Функция принимает массив чисел и возвращает новый массив, где каждый элемент - сумма предыдущих элементов и текущего.
+function cumulativeSum(arr) {
+  let sum = 0;
+  return arr.map(num => {
+    sum += num;
+    return sum;
+  });
+}
+// Задание 5: Создание массива чисел в заданном диапазоне с шагом //
+// Функция создает массив чисел в заданном диапазоне с указанным шагом.
+function range(start, end, step = 1) {
+  const result = [];
+  for (let i = start; i <= end; i += step) {
+    result.push(i);
+  }
+  return result;
+}
+
+// Задание 6: Фильтрация данных с использованием метода reduce
+// Функция фильтрует массив данных на основе объекта фильтра и возвращает новый массив с соответствующими элементами.
+function filterData(data, filter) {
+  const filteredData = data.reduce((result, item) => {
+    const isMatch = Object.keys(filter).every(key => item[key] === filter[key]);
+
+    if (isMatch) {
+      result.push(item);
+    }
+
+    return result;
+  }, []);
+
+  return filteredData;
+}
+
+// Задание 7: Решение задания 6 без использования циклов и forEach
+// Функция фильтрует массив данных без использования циклов и возвращает новый массив с соответствующими элементами.
+function filterDataWithoutLoops(data, filter) {
+  const filterKeys = Object.keys(filter);
+  return data.filter(item => filterKeys.every(key => item[key] === filter[key]));
+}
+
+// Пример использования:
+const employeesData = [
+  { name: 'Иван', age: 25, position: 'Разработчик' },
+  { name: 'Мария', age: 30, position: 'Дизайнер' },
+  { name: 'Алексей', age: 28, position: 'Тестировщик' },
+];
+
+// Вывод отформатированных данных о сотрудниках в консоль
+const formattedEmployees = formatEmployees(employeesData);
+console.log(formattedEmployees);
+
+// Создание и вывод HTML-таблицы на страницу
+const tableHTML = createTable(employeesData);
+document.getElementById('table-container').innerHTML = tableHTML;
+
+// Пример использования для задания 3
+const numbers = [2, 3, 4, 5];
+const product = getProduct(numbers);
+console.log(product);
+
+// Пример использования для задания 4
+const originalArray = [1, 2, 3, 4];
+const resultArray = cumulativeSum(originalArray);
+console.log(resultArray);
+
+// Пример использования для задания 5
+const rangeNumbers = range(1, 10, 2);
+console.log(rangeNumbers);
+
+// Пример использования для задания 6
+const filter = { position: 'developer' };
+const filteredEmployees = filterData(employeesData, filter);
+console.log(filteredEmployees);
+
+// Пример использования для задания 7
+const filteredEmployeesWithoutLoops = filterDataWithoutLoops(employeesData, filter);
+console.log(filteredEmployeesWithoutLoops);
+
+// Функции для отображения результатов
+
+function showFormattedEmployees() {
+  const formattedEmployees = formatEmployees(employeesData);
+  document.getElementById('formatted-employees-result').innerHTML = formattedEmployees.join('<br>');
+}
+
+function showTable() {
+  const tableHTML = createTable(employeesData);
+  document.getElementById('table-result').innerHTML = tableHTML;
+}
+
+function showProduct() {
+  const product = getProduct(numbers);
+  document.getElementById('product-result').innerHTML = `Произведение: ${product}`;
+}
+
+function showCumulativeSum() {
+  const resultArray = cumulativeSum(originalArray);
+  document.getElementById('cumulative-sum-result').innerHTML = `Кумулятивная сумма: ${resultArray.join(', ')}`;
+}
+
+function showRange() {
+  const rangeNumbers = range(1, 10, 2);
+  document.getElementById('range-result').innerHTML = `Массив чисел в диапазоне: ${rangeNumbers.join(', ')}`;
+}
+
+function showFilteredEmployees() {
+  const filterOptions = ['Разработчик', 'Дизайнер', 'Тестировщик'];
+  const randomFilter = getRandomElement(filterOptions);
+  const filter = { position: randomFilter };
+  const filteredEmployees = filterData(employeesData, filter);
+  document.getElementById('filtered-employees-result').innerHTML = `Отфильтрованные сотрудники: ${JSON.stringify(filteredEmployees)}`;
+}
+
+function showFilteredEmployeesWithoutLoops() {
+  const filterOptions = ['Разработчик', 'Дизайнер', 'Тестировщик'];
+  const randomFilter = getRandomElement(filterOptions);
+  const filter = { position: randomFilter };
+  const filteredEmployeesWithoutLoops = filterDataWithoutLoops(employeesData, filter);
+  document.getElementById('filtered-employees-without-loops-result').innerHTML = `Отфильтрованные сотрудники без циклов: ${JSON.stringify(filteredEmployeesWithoutLoops)}`;
+}
+
+// Вспомогательная функция для получения случайного элемента из массива
+function getRandomElement(array) {
+  const randomIndex = Math.floor(Math.random() * array.length);
+  return array[randomIndex];
+}
+</script>
+</body>
+</html>

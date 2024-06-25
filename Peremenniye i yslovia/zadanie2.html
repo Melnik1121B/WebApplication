@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Деление с остатком</title>
+</head>
+<body>
+
+<!-- Элементы для ввода данных и кнопки -->
+<label for="dividend">Делимое:</label>
+<input type="number" id="dividend"><br>
+
+<label for="divisor">Делитель:</label>
+<input type="number" id="divisor"><br>
+
+<button onclick="performDivision()">Выполнить деление</button>
+
+<!-- Элемент для вывода результата -->
+<p id="result"></p>
+
+<script>
+    // Функция для выполнения деления с остатком
+    function performDivision() {
+        // Получаем значения из полей ввода
+        var dividend = parseFloat(document.getElementById('dividend').value);
+        var divisor = parseFloat(document.getElementById('divisor').value);
+
+        // Проверяем, что делитель не равен нулю
+        if (divisor !== 0) {
+            // Вычисляем результат деления с остатком
+            var quotient = Math.floor(dividend / divisor);
+            var remainder = dividend % divisor;
+
+            // Выводим результат на экран
+            var resultElement = document.getElementById('result');
+            resultElement.innerHTML = "Результат деления: " + quotient + " с остатком " + remainder;
+        } else {
+            alert("Делитель не может быть равен нулю. Введите другое значение.");
+        }
+    }
+</script>
+
+</body>
+</html>

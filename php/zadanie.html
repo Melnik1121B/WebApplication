@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Поисковик</title>
+    </head>
+
+    <body>
+        <h3>Выбрать поисковик</h3>
+        <form action="zadanaie.php" method="get">
+            <label for="url">Виберите поисковик:</label>
+            <select name="url" id="url">
+                <option value="https://www.bing.com/">Bing</option>
+                <option value="https://yahoo.com/">Yahoo</option>
+                <option value="https://swisscows.com">Swisscows</option>
+                <option value="https://yandex.kz/">Yandex</option>
+                <option value="https://mail.ru">Mail.ru</option>
+            </select>
+            <label for="query">Напиши запрос:</label>
+            <input type="text" name="query" id="query">
+            <button type="submit">Поиск</button>
+        </form>
+    </body>
+</html>

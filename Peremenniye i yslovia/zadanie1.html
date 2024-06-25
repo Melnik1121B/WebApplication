@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Приветствие</title>
+</head>
+<body>
+
+<!-- Элементы для ввода данных -->
+<label for="surname">Фамилия:</label>
+<input type="text" id="surname"><br>
+
+<label for="name">Имя:</label>
+<input type="text" id="name"><br>
+
+<label for="patronymic">Отчество:</label>
+<input type="text" id="patronymic"><br>
+
+<label for="age">Возраст:</label>
+<input type="number" id="age"><br>
+
+<button onclick="privet()">Поздороваться</button>
+
+<script>
+    // Функция для приветствия пользователя
+    function privet() {
+        // Получаем значения из полей ввода
+        var surname = document.getElementById('surname').value;
+        var name = document.getElementById('name').value;
+        var patronymic = document.getElementById('patronymic').value;
+        var age = parseInt(document.getElementById('age').value);
+
+        // Проверяем возраст и формируем приветствие
+        var greeting = "";
+        if (age < 7) {
+            greeting = "Привет, " + name;
+        } else if (age >= 7 && age <= 18) {
+            greeting = "Здравствуй, " + name;
+        } else {
+            greeting = "Здравствуйте, " + name + " " + patronymic;
+        }
+
+        // Выводим приветствие на экран
+        alert(greeting);
+    }
+</script>
+
+</body>
+</html>

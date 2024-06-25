@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Задание 6</title>
+    </head>
+
+    <body>
+<!--Элементы для ввода данных-->
+    <label for="inputString1">Введите первую строку</label>
+    <input type="text" id="inputString1" placeholder="Например: abc">
+    <label for="inputString2">Введите вторую строку</label>
+    <input type="text" id="inputString2" placeholder="bca">
+    <button onclick="checkPermutation()">Проверить строку на перестановку</button>
+    <!--Элемент для вывода результата-->
+    <p id="result"></p>
+
+    <script>
+        //функция для проверки на перестановку
+        function checkPermutation() {
+            //получаем строки от пользователя
+            var string1 = document.getElementById('inputString1').value;
+            var string2 = document.getElementById('inputString2').value;
+            //проверяем что пользователь ввел две строки
+            if (string1.lenght === 0 || string2.lenght === 0) {
+                alert("Введите обе строки для сравнения");
+                return;
+            }
+            //проверка что одна строка является перестановкой
+            var isPermutation = isPermutationString(string1, string2);
+            //выводим результат
+            var resultElement = document.getElementById('result');
+            resultElement.innerHTML = "Строки" + (isPermutation ? " является" : " не является") + " перестановками";
+        }
+        //функция для проверки на перестановку строк
+        function isPermutationString(str1, str2) {
+            //сортируем символы в обеих строках и стравниваем результаты
+            var sortedStr1 = str1.split('').sort().join('');
+            var sortedStr2 = str2.split('').sort().join('');
+            return sortedStr1 === sortedStr2;
+        }
+    </script>
+
+
+    </body>
+
+</html>
